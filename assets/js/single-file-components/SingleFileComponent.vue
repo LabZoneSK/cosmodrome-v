@@ -1,6 +1,6 @@
 <template>
   <div>
-    Single file component
+    Single file component - Vue loaded!
   </div>
 </template>
 

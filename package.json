@@ -1,5 +1,5 @@
 {
-  "name": "cosmodrome-bv",
+  "name": "cosmodrome-v",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
@@ -8,18 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:LabZoneSK/cosmodrome-bv.git"
+    "url": "git@github.com:LabZoneSK/cosmodrome-v.git"
   },
   "author": "LabZone",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "babel-loader": "^8.0.5",
-    "es6-promise": "^4.2.5",
-    "eslint": "^5.16.0",
-    "eslint-config-eslint": "^5.0.1",
-    "eslint-plugin-vue": "^5.2.2",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "es6-promise": "^4.2.8",
+    "eslint": "^8.2.0",
+    "eslint-config-eslint": "^7.0.0",
+    "eslint-plugin-vue": "^8.0.3",
     "express": "^4.17.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
@@ -38,14 +38,10 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "bootstrap": "^4.5.2",
-    "jquery": "^3.5.1",
-    "natives": "^1.1.6",
-    "popper.js": "^1.16.1",
-    "vue": "^2.6.10",
-    "vue-axios": "^2.1.4",
-    "vuex": "^3.1.0"
+    "axios": "^0.24.0",
+    "vue": "^2.6.14",
+    "vue-axios": "^3.4.0",
+    "vuex": "^3.6.2"
   },
   "browserslist": [
     "last 1 version",

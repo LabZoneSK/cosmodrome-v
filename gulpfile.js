@@ -7,11 +7,18 @@ var gulp = require('gulp'),
   VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 
-gulp.task('server', function () {
+gulp.task('server-dev', function () {
   // Start the server at the beginning of the task
   server.run(['./assets/server/app.js']);
   gulp.watch('./assets/scss/**/*.scss', ['sass-dev']);
   gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], ['scripts-dev']);
+});
+
+gulp.task('server', function () {
+  // Start the server at the beginning of the task
+  server.run(['./assets/server/app.js']);
+  gulp.watch('./assets/scss/**/*.scss', ['sass']);
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], ['scripts']);
 });
 
 gulp.task('sass', function() {
