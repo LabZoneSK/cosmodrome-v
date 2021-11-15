@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-  sass = require('gulp-sass'),
+  sass = require('gulp-sass')(require('node-sass')),
   rename = require('gulp-rename'),
   webpack = require('webpack-stream'),
   sourcemaps = require('gulp-sourcemaps'),
@@ -10,15 +10,15 @@ var gulp = require('gulp'),
 gulp.task('server-dev', function () {
   // Start the server at the beginning of the task
   server.run(['./assets/server/app.js']);
-  gulp.watch('./assets/scss/**/*.scss', ['sass-dev']);
-  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], ['scripts-dev']);
+  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass-dev'));
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts-dev'));
 });
 
 gulp.task('server', function () {
   // Start the server at the beginning of the task
   server.run(['./assets/server/app.js']);
-  gulp.watch('./assets/scss/**/*.scss', ['sass']);
-  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], ['scripts']);
+  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass'));
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts'));
 });
 
 gulp.task('sass', function() {
@@ -127,9 +127,9 @@ gulp.task('scripts-dev', function() {
 
 
 gulp.task('watch-dev', function () {
-  gulp.watch('./assets/scss/**/*.scss', ['sass-dev']);
-  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], ['scripts-dev']);
+  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass-dev'));
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts-dev'));
 });
 
-gulp.task('build', ['sass', 'scripts']);
-gulp.task('build-dev', ['sass-dev', 'scripts-dev']);
+gulp.task('build', gulp.series('sass', 'scripts'));
+gulp.task('build-dev', gulp.series('sass-dev', 'scripts-dev'));
