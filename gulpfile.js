@@ -6,21 +6,6 @@ var gulp = require('gulp'),
   server = require('gulp-express'),
   VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-
-gulp.task('server-dev', function () {
-  // Start the server at the beginning of the task
-  server.run(['./assets/server/app.js']);
-  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass-dev'));
-  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts-dev'));
-});
-
-gulp.task('server', function () {
-  // Start the server at the beginning of the task
-  server.run(['./assets/server/app.js']);
-  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass'));
-  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts'));
-});
-
 gulp.task('sass', function() {
   return gulp.src('./assets/scss/app.scss')
     .pipe(sass({outputStyle: 'compressed', precision: 4})
@@ -43,7 +28,7 @@ gulp.task('sass-dev', function() {
     .pipe(gulp.dest('./web/css/'));
 })
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
   return gulp.src('./assets/js/app.js')
     .pipe(webpack({
       mode: 'production',
@@ -88,9 +73,6 @@ gulp.task('scripts', function() {
         new VueLoaderPlugin()
       ]
   }))
-  .on('error', function handleError() {
-    this.emit('end'); // Recover from errors
-  })
   .pipe(gulp.dest('./web/js'));
 });
 
@@ -119,9 +101,6 @@ gulp.task('scripts-dev', function() {
         new VueLoaderPlugin()
       ]
     }))
-    .on('error', function handleError() {
-      this.emit('end'); // Recover from errors
-    })
     .pipe(gulp.dest('./web/js'));
 });
 
@@ -133,3 +112,19 @@ gulp.task('watch-dev', function () {
 
 gulp.task('build', gulp.series('sass', 'scripts'));
 gulp.task('build-dev', gulp.series('sass-dev', 'scripts-dev'));
+
+gulp.task('server-dev', function () {
+  gulp.series('build-dev')();
+  // Start the server at the beginning of the task
+  server.run(['./assets/server/app.js']);
+  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass-dev'));
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts-dev'));
+});
+
+gulp.task('server', function () {
+  gulp.series('build')();
+  // Start the server at the beginning of the task
+  server.run(['./assets/server/app.js']);
+  gulp.watch('./assets/scss/**/*.scss', gulp.series('sass'));
+  gulp.watch(['./assets/js/**/*.js', "./assets/js/**/*.vue"], gulp.series('scripts'));
+});
